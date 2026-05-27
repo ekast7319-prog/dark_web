@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8CC7A;
+    --gold-dark: #8A6820;
+    --deep-green: #0A2818;
+    --green: #133D24;
+    --green-mid: #1E5C36;
+    --cream: #F5EDD6;
+    --cream-light: #FBF5E6;
+    --ivory: #FFF8E7;
+  }
+
+  html, body {
+    width: 100%; min-height: 100vh;
+    background: var(--deep-green);
+    font-family: 'Amiri', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* === STAR FIELD === */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s);
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.4); }
+  }
+
+  /* === GEOMETRIC BORDER PATTERN === */
+  .geo-border {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  }
+  .geo-border svg { width: 100%; height: 100%; }
+
+  /* === MAIN LAYOUT === */
+  .page {
+    position: relative; z-index: 2;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 24px;
+    gap: 0;
+  }
+
+  /* === CRESCENT & STAR EMBLEM === */
+  .emblem {
+    margin-bottom: 32px;
+    animation: floatIn 1.6s cubic-bezier(.22,1,.36,1) both;
+  }
+  .emblem svg { filter: drop-shadow(0 0 18px rgba(201,168,76,0.55)); }
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(-32px) scale(0.85); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* === ARABIC CALLIGRAPHY LINE === */
+  .arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    color: var(--gold-light);
+    text-align: center;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    animation: fadeRise 1.4s ease both 0.3s;
+    text-shadow: 0 0 30px rgba(201,168,76,0.45);
+    margin-bottom: 10px;
+  }
+
+  /* === MAIN TITLE === */
+  .main-title {
+    font-family: 'Cinzel Decorative', 'Times New Roman', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+    background: linear-gradient(135deg, #E8CC7A 0%, #C9A84C 40%, #FFF0A0 60%, #C9A84C 80%, #8A6820 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeRise 1.4s ease both 0.5s;
+    filter: drop-shadow(0 2px 16px rgba(201,168,76,0.3));
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    text-align: center;
+    color: var(--cream);
+    letter-spacing: 0.12em;
+    animation: fadeRise 1.4s ease both 0.65s;
+    margin-bottom: 28px;
+    text-shadow: 0 0 20px rgba(245,237,214,0.3);
+  }
+
+  /* === ORNAMENTAL DIVIDER === */
+  .ornament {
+    display: flex; align-items: center; gap: 14px;
+    margin: 12px 0 28px;
+    animation: fadeRise 1.4s ease both 0.8s;
+    width: min(500px, 90vw);
+  }
+  .ornament-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+  .ornament-diamond {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(201,168,76,0.6);
+  }
+  .ornament-small {
+    width: 6px; height: 6px;
+    background: var(--gold-dark);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* === MESSAGE CARD === */
+  .card {
+    background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 4px;
+    padding: clamp(24px, 5vw, 44px) clamp(28px, 6vw, 60px);
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: fadeRise 1.4s ease both 1s;
+    box-shadow:
+      0 0 0 1px rgba(201,168,76,0.1),
+      0 0 60px rgba(10,40,24,0.8),
+      inset 0 1px 0 rgba(201,168,76,0.15);
+  }
+
+  /* Corner ornaments */
+  .card::before, .card::after,
+  .card .corner-br, .card .corner-bl {
+    content: '';
+    position: absolute;
+    width: 28px; height: 28px;
+    border-color: var(--gold-dark);
+    border-style: solid;
+  }
+  .card::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+  .card::after  { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+  .card .corner-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+  .card .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+
+  .message {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: var(--cream);
+    line-height: 2;
+    font-style: italic;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+
+  .dua {
+    margin-top: 20px;
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--gold-light);
+    line-height: 1.9;
+    opacity: 0.88;
+  }
+
+  /* === LANTERNS === */
+  .lanterns {
+    display: flex; gap: clamp(40px, 8vw, 90px);
+    margin: 36px 0 0;
+    animation: fadeRise 1.4s ease both 1.2s;
+  }
+  .lantern { animation: sway 4s ease-in-out infinite; transform-origin: top center; }
+  .lantern:nth-child(2) { animation-delay: -1.3s; }
+  .lantern:nth-child(3) { animation-delay: -2.6s; }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-4deg); }
+    50%       { transform: rotate(4deg); }
+  }
+
+  /* === MOON PHASE ROW === */
+  .moon-row {
+    display: flex; gap: 20px; align-items: center;
+    margin-top: 40px;
+    animation: fadeRise 1.4s ease both 1.4s;
+    opacity: 0.55;
+  }
+  .moon-dot {
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px rgba(201,168,76,0.4);
+  }
+
+  /* === FOOTER VERSE === */
+  .verse {
+    margin-top: 36px;
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+    color: rgba(245,237,214,0.45);
+    text-align: center;
+    letter-spacing: 0.05em;
+    animation: fadeRise 1.4s ease both 1.6s;
+    max-width: 500px;
+  }
+
+  @keyframes fadeRise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse on the main title */
+  @keyframes goldPulse {
+    0%, 100% { filter: drop-shadow(0 2px 16px rgba(201,168,76,0.3)); }
+    50%       { filter: drop-shadow(0 2px 28px rgba(201,168,76,0.65)); }
+  }
+  .main-title { animation: fadeRise 1.4s ease both 0.5s, goldPulse 4s ease-in-out infinite 2s; }
+</style>
+</head>
+<body>
+
+<!-- Star field -->
+<div class="stars" id="stars"></div>
+
+<!-- Geometric tiling border (SVG) -->
+<div class="geo-border">
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="geo" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="none"/>
+      <!-- eight-point star tile -->
+      <polygon points="4,0 5,3 8,4 5,5 4,8 3,5 0,4 3,3" fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="0.3"/>
+      <circle cx="4" cy="4" r="0.4" fill="rgba(201,168,76,0.18)"/>
+    </pattern>
+    <!-- frame rects -->
+  </defs>
+  <!-- top band -->
+  <rect x="0" y="0" width="100" height="4" fill="url(#geo)"/>
+  <!-- bottom band -->
+  <rect x="0" y="96" width="100" height="4" fill="url(#geo)"/>
+  <!-- left band -->
+  <rect x="0" y="0" width="2.5" height="100" fill="url(#geo)"/>
+  <!-- right band -->
+  <rect x="97.5" y="0" width="2.5" height="100" fill="url(#geo)"/>
+  <!-- corner accents -->
+  <rect x="0" y="0" width="6" height="0.6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="0" y="0" width="0.6" height="6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="94" y="0" width="6" height="0.6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="99.4" y="0" width="0.6" height="6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="0" y="99.4" width="6" height="0.6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="0" y="94" width="0.6" height="6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="94" y="99.4" width="6" height="0.6" fill="rgba(201,168,76,0.5)"/>
+  <rect x="99.4" y="94" width="0.6" height="6" fill="rgba(201,168,76,0.5)"/>
+</svg>
+</div>
+
+<div class="page">
+
+  <!-- Crescent & Star emblem SVG -->
+  <div class="emblem">
+    <svg width="120" height="110" viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="moonGrad" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#FFF0A0"/>
+          <stop offset="50%" stop-color="#C9A84C"/>
+          <stop offset="100%" stop-color="#8A6820"/>
+        </radialGradient>
+      </defs>
+      <!-- Crescent moon -->
+      <path d="M 38 15
+               A 38 38 0 1 1 38 95
+               A 28 28 0 1 0 38 15 Z"
+            fill="url(#moonGrad)" opacity="0.95"/>
+      <!-- Star of Rub el Hizb (eight-pointed) -->
+      <g transform="translate(84,30)">
+        <polygon points="0,-13 3.5,-3.5 13,0 3.5,3.5 0,13 -3.5,3.5 -13,0 -3.5,-3.5"
+                 fill="#E8CC7A" opacity="0.97"/>
+        <polygon points="0,-13 3.5,-3.5 13,0 3.5,3.5 0,13 -3.5,3.5 -13,0 -3.5,-3.5"
+                 fill="#C9A84C" transform="rotate(45)" opacity="0.85"/>
+        <circle r="3.5" fill="#FFF0A0" opacity="0.9"/>
+      </g>
+      <!-- small decorative dots -->
+      <circle cx="88" cy="60" r="2" fill="#C9A84C" opacity="0.5"/>
+      <circle cx="76" cy="72" r="1.4" fill="#C9A84C" opacity="0.4"/>
+      <circle cx="96" cy="68" r="1.2" fill="#C9A84C" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- Arabic calligraphy -->
+  <div class="arabic">عيد مبارك</div>
+
+  <!-- Title -->
+  <div class="main-title">Eid Mubarak</div>
+  <div class="subtitle">Blessed Eid to You & Yours</div>
+
+  <!-- Ornament -->
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-small"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-small"></div>
+    <div class="ornament-line"></div>
+  </div>
+
+  <!-- Message card -->
+  <div class="card">
+    <div class="corner-br"></div>
+    <div class="corner-bl"></div>
+    <p class="message">
+      May this blessed Eid fill your home with joy, your heart with peace,<br>
+      and your days with the warmth of Allah's infinite mercy.<br>
+      May your prayers be answered and your fasts accepted.
+    </p>
+    <p class="dua">
+      تَقَبَّلَ اللّهُ مِنَّا وَمِنكُم<br>
+      <span style="font-size:0.82em; opacity:0.75;">Taqabbalallahu minna wa minkum</span><br>
+      <span style="font-size:0.8em; opacity:0.65; font-style:italic;">May Allah accept (the worship) from us and from you.</span>
+    </p>
+  </div>
+
+  <!-- Lanterns -->
+  <div class="lanterns">
+    <!-- Lantern 1 (small) -->
+    <div class="lantern">
+      <svg width="36" height="72" viewBox="0 0 36 72" xmlns="http://www.w3.org/2000/svg">
+        <line x1="18" y1="0" x2="18" y2="8" stroke="#C9A84C" stroke-width="1.5"/>
+        <polygon points="12,8 24,8 22,14 14,14" fill="#8A6820"/>
+        <rect x="10" y="14" width="16" height="36" rx="8" fill="rgba(201,168,76,0.15)" stroke="#C9A84C" stroke-width="1"/>
+        <!-- glow -->
+        <ellipse cx="18" cy="32" rx="7" ry="14" fill="rgba(255,220,80,0.18)"/>
+        <!-- panes -->
+        <line x1="18" y1="14" x2="18" y2="50" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+        <line x1="10" y1="32" x2="26" y2="32" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+        <polygon points="12,50 24,50 22,58 14,58" fill="#8A6820"/>
+        <line x1="14" y1="58" x2="12" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+        <line x1="18" y1="58" x2="18" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+        <line x1="22" y1="58" x2="24" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+      </svg>
+    </div>
+    <!-- Lantern 2 (large, center) -->
+    <div class="lantern" style="transform-origin:top center; margin-top:-10px;">
+      <svg width="52" height="100" viewBox="0 0 52 100" xmlns="http://www.w3.org/2000/svg">
+        <line x1="26" y1="0" x2="26" y2="10" stroke="#E8CC7A" stroke-width="2"/>
+        <polygon points="16,10 36,10 32,18 20,18" fill="#8A6820" stroke="#C9A84C" stroke-width="0.5"/>
+        <rect x="13" y="18" width="26" height="52" rx="13" fill="rgba(201,168,76,0.2)" stroke="#E8CC7A" stroke-width="1.5"/>
+        <!-- inner glow -->
+        <ellipse cx="26" cy="44" rx="10" ry="22" fill="rgba(255,220,80,0.25)"/>
+        <ellipse cx="26" cy="44" rx="5" ry="10" fill="rgba(255,240,140,0.3)"/>
+        <!-- panes -->
+        <line x1="26" y1="18" x2="26" y2="70" stroke="#C9A84C" stroke-width="0.7" opacity="0.45"/>
+        <line x1="13" y1="44" x2="39" y2="44" stroke="#C9A84C" stroke-width="0.7" opacity="0.45"/>
+        <!-- star cutout hint -->
+        <polygon points="26,28 28,33 34,33 29,37 31,42 26,38 21,42 23,37 18,33 24,33"
+                 fill="rgba(255,240,140,0.35)" stroke="rgba(201,168,76,0.5)" stroke-width="0.5"/>
+        <polygon points="20,18 32,18 30,28 22,28" fill="#8A6820" stroke="#C9A84C" stroke-width="0.5"/>
+        <polygon points="20,70 32,70 30,78 22,78" fill="#8A6820" stroke="#C9A84C" stroke-width="0.5"/>
+        <line x1="20" y1="78" x2="17" y2="92" stroke="#E8CC7A" stroke-width="1.2" opacity="0.7"/>
+        <line x1="26" y1="78" x2="26" y2="92" stroke="#E8CC7A" stroke-width="1.2" opacity="0.7"/>
+        <line x1="32" y1="78" x2="35" y2="92" stroke="#E8CC7A" stroke-width="1.2" opacity="0.7"/>
+      </svg>
+    </div>
+    <!-- Lantern 3 (small) -->
+    <div class="lantern">
+      <svg width="36" height="72" viewBox="0 0 36 72" xmlns="http://www.w3.org/2000/svg">
+        <line x1="18" y1="0" x2="18" y2="8" stroke="#C9A84C" stroke-width="1.5"/>
+        <polygon points="12,8 24,8 22,14 14,14" fill="#8A6820"/>
+        <rect x="10" y="14" width="16" height="36" rx="8" fill="rgba(201,168,76,0.15)" stroke="#C9A84C" stroke-width="1"/>
+        <ellipse cx="18" cy="32" rx="7" ry="14" fill="rgba(255,220,80,0.18)"/>
+        <line x1="18" y1="14" x2="18" y2="50" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+        <line x1="10" y1="32" x2="26" y2="32" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+        <polygon points="12,50 24,50 22,58 14,58" fill="#8A6820"/>
+        <line x1="14" y1="58" x2="12" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+        <line x1="18" y1="58" x2="18" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+        <line x1="22" y1="58" x2="24" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Moon phase row -->
+  <div class="moon-row">
+    <div class="moon-dot" style="width:5px;height:5px;"></div>
+    <div class="moon-dot" style="width:7px;height:7px;opacity:0.7;"></div>
+    <div class="moon-dot" style="width:9px;height:9px;opacity:0.55;"></div>
+    <!-- crescent hint -->
+    <svg width="22" height="22" viewBox="0 0 22 22">
+      <path d="M11 3 A9 9 0 1 1 11 19 A6 6 0 1 0 11 3Z" fill="rgba(201,168,76,0.55)"/>
+    </svg>
+    <div class="moon-dot" style="width:9px;height:9px;opacity:0.55;"></div>
+    <div class="moon-dot" style="width:7px;height:7px;opacity:0.7;"></div>
+    <div class="moon-dot" style="width:5px;height:5px;"></div>
+  </div>
+
+  <!-- Footer verse -->
+  <p class="verse">
+    "And He is the Most Forgiving, the Most Merciful." — Quran 85:14
+  </p>
+
+</div>
+
+<script>
+  // Generate star field
+  const container = document.getElementById('stars');
+  const count = 140;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.4 + 0.6;
+    s.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      width: ${size}px;
+      height: ${size}px;
+      --d: ${2 + Math.random() * 4}s;
+      --delay: -${Math.random() * 6}s;
+    `;
+    container.appendChild(s);
+  }
+</script>
+</body>
+</html>
