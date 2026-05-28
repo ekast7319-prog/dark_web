@@ -52,8 +52,76 @@
     min-height: 100vh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    padding: 60px 24px;
+    padding: 100px 24px 60px;
     gap: 0;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    background: rgba(10, 40, 24, 0.88);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-brand {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold-light);
+    letter-spacing: 0.16em;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    color: rgba(245, 237, 214, 0.88);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    transition: color 0.22s ease, transform 0.22s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus {
+    color: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .nav-link.primary {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 14px;
+    border-radius: 999px;
+    color: var(--cream);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (max-width: 640px) {
+    .navbar {
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 12px 18px;
+    }
+    .nav-links {
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
   }
 
   .gift-overlay {
@@ -376,6 +444,17 @@
 </head>
 <body>
 
+<nav class="navbar" aria-label="Primary navigation">
+  <a class="nav-brand" href="#home">Eid Glow</a>
+  <div class="nav-links">
+    <a class="nav-link" href="#home">Home</a>
+    <a class="nav-link" href="#message">Message</a>
+    <a class="nav-link" href="#lanterns">Lanterns</a>
+    <a class="nav-link" href="#verse">Blessing</a>
+    <a class="nav-link primary" href="index.html">Back Home</a>
+  </div>
+</nav>
+
 <!-- Star field -->
 <div class="stars" id="stars"></div>
 
@@ -426,7 +505,7 @@
   </div>
 </div>
 
-<div class="page">
+<div class="page" id="home">
 
   <!-- Crescent & Star emblem SVG -->
   <div class="emblem">
@@ -475,7 +554,7 @@
   </div>
 
   <!-- Message card -->
-  <div class="card">
+  <div class="card" id="message">
     <div class="corner-br"></div>
     <div class="corner-bl"></div>
     <p class="message">
@@ -491,7 +570,7 @@
   </div>
 
   <!-- Lanterns -->
-  <div class="lanterns">
+  <div class="lanterns" id="lanterns">
     <!-- Lantern 1 (small) -->
     <div class="lantern">
       <svg width="36" height="72" viewBox="0 0 36 72" xmlns="http://www.w3.org/2000/svg">
@@ -563,7 +642,7 @@
   </div>
 
   <!-- Footer verse -->
-  <p class="verse">
+  <p class="verse" id="verse">
     "And He is the Most Forgiving, the Most Merciful." — Quran 85:14
   </p>
 
