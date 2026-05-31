@@ -7,339 +7,76 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --gold: #C9A84C;
-    --gold-light: #E8CC7A;
-    --gold-dark: #8A6820;
-    --deep-green: #0A2818;
-    --green: #133D24;
-    --green-mid: #1E5C36;
-    --cream: #F5EDD6;
-    --cream-light: #FBF5E6;
-    --ivory: #FFF8E7;
+    --gold: #C9A84C; --gold-light: #E8CC7A; --gold-dark: #8A6820;
+    --deep-green: #0A2818; --green: #133D24; --green-mid: #1E5C36;
+    --cream: #F5EDD6; --cream-light: #FBF5E6; --ivory: #FFF8E7;
   }
+  html, body { width: 100%; min-height: 100vh; background: var(--deep-green); font-family: 'Amiri', Georgia, serif; overflow-x: hidden; }
+  html { scroll-behavior: smooth; }
 
-  html, body {
-    width: 100%; min-height: 100vh;
-    background: var(--deep-green);
-    font-family: 'Amiri', Georgia, serif;
-    overflow-x: hidden;
-  }
-
-  /* === STAR FIELD === */
   .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-  .star {
-    position: absolute;
-    background: var(--gold-light);
-    border-radius: 50%;
-    animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s);
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.15; transform: scale(1); }
-    50% { opacity: 0.9; transform: scale(1.4); }
-  }
+  .star { position: absolute; background: var(--gold-light); border-radius: 50%; animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s); }
+  @keyframes twinkle { 0%, 100% { opacity: 0.15; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.4); } }
 
-  /* === GEOMETRIC BORDER PATTERN === */
-  .geo-border {
-    position: fixed; inset: 0; pointer-events: none; z-index: 1;
-  }
+  .geo-border { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
   .geo-border svg { width: 100%; height: 100%; }
 
-  /* === MAIN LAYOUT === */
-  .page {
-    position: relative; z-index: 2;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 100px 24px 60px;
-    gap: 0;
-  }
+  .page { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 24px 60px; gap: 0; }
 
-  /* === SECTION BASE === */
-  .section {
-    position: relative; z-index: 2;
-    width: 100%;
-    display: flex; flex-direction: column;
-    align-items: center;
-    padding: 80px 24px 80px;
-  }
-
-  .section-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    color: var(--gold-light);
-    letter-spacing: 0.1em;
-    text-align: center;
-    margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(201,168,76,0.4);
-  }
-
-  .section-sub {
-    font-family: 'Amiri', serif;
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
-    color: rgba(245,237,214,0.6);
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 36px;
-  }
-
-  /* section divider */
-  .section-divider {
-    width: min(500px, 90vw);
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 48px;
-  }
+  .section { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 80px 24px 80px; }
+  .section-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 3.5vw, 2.2rem); color: var(--gold-light); letter-spacing: 0.1em; text-align: center; margin-bottom: 10px; text-shadow: 0 0 20px rgba(201,168,76,0.4); }
+  .section-sub { font-family: 'Amiri', serif; font-size: clamp(0.95rem, 2vw, 1.1rem); color: rgba(245,237,214,0.6); text-align: center; font-style: italic; margin-bottom: 36px; }
+  .section-divider { width: min(500px, 90vw); display: flex; align-items: center; gap: 14px; margin-bottom: 48px; }
   .section-divider .ornament-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
   .section-divider .ornament-diamond { width: 10px; height: 10px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; box-shadow: 0 0 10px rgba(201,168,76,0.6); }
   .section-divider .ornament-small { width: 6px; height: 6px; background: var(--gold-dark); transform: rotate(45deg); flex-shrink: 0; }
 
-  .navbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 24px;
-    background: rgba(10, 40, 24, 0.88);
-    border-bottom: 1px solid rgba(201, 168, 76, 0.18);
-    backdrop-filter: blur(14px);
-  }
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 6; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 24px; background: rgba(10,40,24,0.88); border-bottom: 1px solid rgba(201,168,76,0.18); backdrop-filter: blur(14px); }
+  .nav-brand { font-family: 'Cinzel Decorative', serif; color: var(--gold-light); letter-spacing: 0.16em; font-size: 1rem; text-decoration: none; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+  .nav-link { color: rgba(245,237,214,0.88); text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; transition: color 0.22s ease, transform 0.22s ease; }
+  .nav-link:hover, .nav-link:focus { color: var(--gold-light); transform: translateY(-1px); }
+  @media (max-width: 640px) { .navbar { flex-wrap: wrap; justify-content: center; padding: 12px 18px; } .nav-links { justify-content: center; gap: 10px; width: 100%; } }
 
-  .nav-brand {
-    font-family: 'Cinzel Decorative', serif;
-    color: var(--gold-light);
-    letter-spacing: 0.16em;
-    font-size: 1rem;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    justify-content: flex-end;
-  }
-
-  .nav-link {
-    color: rgba(245, 237, 214, 0.88);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.78rem;
-    transition: color 0.22s ease, transform 0.22s ease;
-  }
-
-  .nav-link:hover,
-  .nav-link:focus {
-    color: var(--gold-light);
-    transform: translateY(-1px);
-  }
-
-  .nav-link.primary {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 10px 14px;
-    border-radius: 999px;
-    color: var(--cream);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  @media (max-width: 640px) {
-    .navbar {
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 12px 18px;
-    }
-    .nav-links {
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-    }
-  }
-
-  .gift-overlay {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-    background: rgba(4, 12, 16, 0.94);
-    backdrop-filter: blur(10px);
-    z-index: 12;
-    transition: opacity 0.45s ease, visibility 0.45s ease;
-  }
-
-  .gift-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .gift-card {
-    width: min(380px, 100%);
-    padding: 30px 20px 24px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 28px;
-    box-shadow: 0 24px 68px rgba(0, 0, 0, 0.36);
-    text-align: center;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-  }
-
+  .gift-overlay { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(4,12,16,0.94); backdrop-filter: blur(10px); z-index: 12; transition: opacity 0.45s ease, visibility 0.45s ease; }
+  .gift-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .gift-card { width: min(380px, 100%); padding: 30px 20px 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 28px; box-shadow: 0 24px 68px rgba(0,0,0,0.36); text-align: center; color: #fff; position: relative; overflow: hidden; }
   .gift-detail { display: grid; gap: 18px; place-items: center; }
-
-  .gift-box {
-    position: relative;
-    width: 170px; height: 170px;
-    border-radius: 20px;
-    background: linear-gradient(180deg, #8A6820 0%, #C9A84C 100%);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), 0 22px 40px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    animation: giftPulse 2.8s ease-in-out infinite;
-  }
-
-  .gift-box::before, .gift-box::after {
-    content: '';
-    position: absolute;
-    left: 50%; top: 50%;
-    width: 40px; height: 170px;
-    background: rgba(255, 255, 255, 0.18);
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-  }
-  .gift-box::after { width: 170px; height: 40px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
+  .gift-box { position: relative; width: 170px; height: 170px; border-radius: 20px; background: linear-gradient(180deg, #8A6820 0%, #C9A84C 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), 0 22px 40px rgba(0,0,0,0.3); cursor: pointer; animation: giftPulse 2.8s ease-in-out infinite; }
+  .gift-box::before, .gift-box::after { content: ''; position: absolute; left: 50%; top: 50%; width: 40px; height: 170px; background: rgba(255,255,255,0.18); transform: translate(-50%, -50%); border-radius: 20px; }
+  .gift-box::after { width: 170px; height: 40px; }
   .gift-ribbon { position: absolute; inset: 0; display: grid; place-items: center; }
   .gift-bow { width: 60px; height: 60px; position: relative; }
-  .gift-bow::before, .gift-bow::after {
-    content: '';
-    position: absolute;
-    width: 24px; height: 44px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px 16px 2px 2px;
-    transform-origin: bottom center;
-  }
+  .gift-bow::before, .gift-bow::after { content: ''; position: absolute; width: 24px; height: 44px; background: rgba(255,255,255,0.95); border-radius: 16px 16px 2px 2px; transform-origin: bottom center; }
   .gift-bow::before { left: 0; transform: rotate(-28deg); }
-  .gift-bow::after  { right: 0; transform: rotate(28deg); }
-
+  .gift-bow::after { right: 0; transform: rotate(28deg); }
   .gift-label { margin-top: 10px; font-size: 1rem; color: #fff; opacity: 0.92; letter-spacing: 0.04em; }
   .gift-copy { font-size: clamp(1rem, 2.3vw, 1.2rem); line-height: 1.6; max-width: 320px; color: rgba(255,255,255,0.9); }
+  .gift-button { margin-top: 8px; padding: 14px 18px; background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.85)); border: none; border-radius: 999px; color: #1E3A21; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: transform 0.22s ease, box-shadow 0.22s ease; }
+  .gift-button:hover { transform: translateY(-1px); box-shadow: 0 14px 24px rgba(0,0,0,0.16); }
+  @keyframes giftPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
-  .gift-button {
-    margin-top: 8px;
-    padding: 14px 18px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.85));
-    border: none; border-radius: 999px;
-    color: #1E3A21; font-weight: 700; letter-spacing: 0.04em;
-    cursor: pointer;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-  }
-  .gift-button:hover, .gift-button:focus { transform: translateY(-1px); box-shadow: 0 14px 24px rgba(0,0,0,0.16); }
-
-  @keyframes giftPulse {
-    0%, 100% { transform: scale(1); }
-    50%       { transform: scale(1.04); }
-  }
-
-  /* === CRESCENT & STAR EMBLEM === */
   .emblem { margin-bottom: 32px; animation: floatIn 1.6s cubic-bezier(.22,1,.36,1) both; }
   .emblem svg { filter: drop-shadow(0 0 18px rgba(201,168,76,0.55)); }
-  @keyframes floatIn {
-    from { opacity: 0; transform: translateY(-32px) scale(0.85); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
+  @keyframes floatIn { from { opacity: 0; transform: translateY(-32px) scale(0.85); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-  .arabic {
-    font-family: 'Amiri', serif;
-    font-size: clamp(2rem, 5vw, 3.8rem);
-    color: var(--gold-light);
-    text-align: center;
-    letter-spacing: 0.04em;
-    line-height: 1.4;
-    animation: fadeRise 1.4s ease both 0.3s;
-    text-shadow: 0 0 30px rgba(201,168,76,0.45);
-    margin-bottom: 10px;
-  }
-
-  .main-title {
-    font-family: 'Cinzel Decorative', 'Times New Roman', serif;
-    font-size: clamp(2.8rem, 7vw, 6rem);
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.1;
-    letter-spacing: 0.06em;
-    background: linear-gradient(135deg, #E8CC7A 0%, #C9A84C 40%, #FFF0A0 60%, #C9A84C 80%, #8A6820 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: fadeRise 1.4s ease both 0.5s;
-    filter: drop-shadow(0 2px 16px rgba(201,168,76,0.3));
-    margin-bottom: 6px;
-  }
-
-  .subtitle {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.4rem, 3.5vw, 2.6rem);
-    font-weight: 400;
-    text-align: center;
-    color: var(--cream);
-    letter-spacing: 0.12em;
-    animation: fadeRise 1.4s ease both 0.65s;
-    margin-bottom: 28px;
-    text-shadow: 0 0 20px rgba(245,237,214,0.3);
-  }
-
-  .ornament {
-    display: flex; align-items: center; gap: 14px;
-    margin: 12px 0 28px;
-    animation: fadeRise 1.4s ease both 0.8s;
-    width: min(500px, 90vw);
-  }
+  .arabic { font-family: 'Amiri', serif; font-size: clamp(2rem, 5vw, 3.8rem); color: var(--gold-light); text-align: center; letter-spacing: 0.04em; line-height: 1.4; animation: fadeRise 1.4s ease both 0.3s; text-shadow: 0 0 30px rgba(201,168,76,0.45); margin-bottom: 10px; }
+  .main-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 700; text-align: center; line-height: 1.1; letter-spacing: 0.06em; background: linear-gradient(135deg, #E8CC7A 0%, #C9A84C 40%, #FFF0A0 60%, #C9A84C 80%, #8A6820 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeRise 1.4s ease both 0.5s, goldPulse 4s ease-in-out infinite 2s; filter: drop-shadow(0 2px 16px rgba(201,168,76,0.3)); margin-bottom: 6px; }
+  .subtitle { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 3.5vw, 2.6rem); font-weight: 400; text-align: center; color: var(--cream); letter-spacing: 0.12em; animation: fadeRise 1.4s ease both 0.65s; margin-bottom: 28px; text-shadow: 0 0 20px rgba(245,237,214,0.3); }
+  .ornament { display: flex; align-items: center; gap: 14px; margin: 12px 0 28px; animation: fadeRise 1.4s ease both 0.8s; width: min(500px, 90vw); }
   .ornament-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
   .ornament-diamond { width: 10px; height: 10px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; box-shadow: 0 0 10px rgba(201,168,76,0.6); }
   .ornament-small { width: 6px; height: 6px; background: var(--gold-dark); transform: rotate(45deg); flex-shrink: 0; }
 
-  .card {
-    background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%);
-    border: 1px solid rgba(201,168,76,0.35);
-    border-radius: 4px;
-    padding: clamp(24px, 5vw, 44px) clamp(28px, 6vw, 60px);
-    max-width: 680px; width: 100%;
-    text-align: center;
-    position: relative;
-    animation: fadeRise 1.4s ease both 1s;
-    box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 0 60px rgba(10,40,24,0.8), inset 0 1px 0 rgba(201,168,76,0.15);
-  }
-
-  .card::before, .card::after, .card .corner-br, .card .corner-bl {
-    content: ''; position: absolute;
-    width: 28px; height: 28px;
-    border-color: var(--gold-dark); border-style: solid;
-  }
+  .card { background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%); border: 1px solid rgba(201,168,76,0.35); border-radius: 4px; padding: clamp(24px, 5vw, 44px) clamp(28px, 6vw, 60px); max-width: 680px; width: 100%; text-align: center; position: relative; animation: fadeRise 1.4s ease both 1s; box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 0 60px rgba(10,40,24,0.8), inset 0 1px 0 rgba(201,168,76,0.15); }
+  .card::before, .card::after, .card .corner-br, .card .corner-bl { content: ''; position: absolute; width: 28px; height: 28px; border-color: var(--gold-dark); border-style: solid; }
   .card::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
-  .card::after  { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+  .card::after { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
   .card .corner-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
   .card .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
-
-  .message {
-    font-family: 'Amiri', serif;
-    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-    color: var(--cream); line-height: 2;
-    font-style: italic;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
-  }
-
-  .dua-text {
-    margin-top: 20px;
-    font-family: 'Amiri', serif;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: var(--gold-light); line-height: 1.9; opacity: 0.88;
-  }
+  .message { font-family: 'Amiri', serif; font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--cream); line-height: 2; font-style: italic; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+  .dua-text { margin-top: 20px; font-family: 'Amiri', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--gold-light); line-height: 1.9; opacity: 0.88; }
 
   .lanterns { display: flex; gap: clamp(40px, 8vw, 90px); margin: 36px 0 0; animation: fadeRise 1.4s ease both 1.2s; }
   .lantern { animation: sway 4s ease-in-out infinite; transform-origin: top center; }
@@ -349,280 +86,259 @@
 
   .moon-row { display: flex; gap: 20px; align-items: center; margin-top: 40px; animation: fadeRise 1.4s ease both 1.4s; opacity: 0.55; }
   .moon-dot { border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px rgba(201,168,76,0.4); }
-
-  .verse {
-    margin-top: 36px;
-    font-family: 'Amiri', serif;
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    color: rgba(245,237,214,0.45);
-    text-align: center; letter-spacing: 0.05em;
-    animation: fadeRise 1.4s ease both 1.6s;
-    max-width: 500px;
-  }
+  .verse { margin-top: 36px; font-family: 'Amiri', serif; font-size: clamp(0.85rem, 1.8vw, 1rem); color: rgba(245,237,214,0.45); text-align: center; letter-spacing: 0.05em; animation: fadeRise 1.4s ease both 1.6s; max-width: 500px; }
 
   @keyframes fadeRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes goldPulse { 0%, 100% { filter: drop-shadow(0 2px 16px rgba(201,168,76,0.3)); } 50% { filter: drop-shadow(0 2px 28px rgba(201,168,76,0.65)); } }
-  .main-title { animation: fadeRise 1.4s ease both 0.5s, goldPulse 4s ease-in-out infinite 2s; }
 
-  /* ===================== */
-  /* === COUNTDOWN ======= */
-  /* ===================== */
-  #countdown {
-    background: linear-gradient(160deg, rgba(19,61,36,0.7) 0%, rgba(10,40,24,0.9) 100%);
-    border-top: 1px solid rgba(201,168,76,0.18);
-    border-bottom: 1px solid rgba(201,168,76,0.18);
-  }
+  /* COUNTDOWN */
+  #countdown { background: linear-gradient(160deg, rgba(19,61,36,0.7) 0%, rgba(10,40,24,0.9) 100%); border-top: 1px solid rgba(201,168,76,0.18); border-bottom: 1px solid rgba(201,168,76,0.18); }
+  .countdown-grid { display: flex; gap: clamp(16px, 4vw, 36px); flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+  .countdown-unit { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 80px; }
+  .countdown-number { font-family: 'Cinzel Decorative', serif; font-size: clamp(2.4rem, 6vw, 4rem); color: var(--gold-light); line-height: 1; text-shadow: 0 0 24px rgba(201,168,76,0.5); background: linear-gradient(160deg, rgba(19,61,36,0.9), rgba(10,40,24,0.95)); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; width: clamp(80px, 16vw, 110px); height: clamp(80px, 16vw, 110px); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(10,40,24,0.6), inset 0 1px 0 rgba(201,168,76,0.15); position: relative; }
+  .countdown-number::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(201,168,76,0.12); }
+  .countdown-label { font-family: 'Amiri', serif; font-size: 0.85rem; color: rgba(245,237,214,0.6); letter-spacing: 0.15em; text-transform: uppercase; }
+  .countdown-colon { font-family: 'Cinzel Decorative', serif; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--gold-dark); margin-top: -18px; align-self: center; }
+  .next-eid-label { margin-top: 28px; font-family: 'Amiri', serif; font-size: clamp(0.9rem, 2vw, 1.1rem); color: rgba(245,237,214,0.5); font-style: italic; text-align: center; letter-spacing: 0.06em; }
 
-  .countdown-grid {
-    display: flex;
-    gap: clamp(16px, 4vw, 36px);
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  .countdown-unit {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    min-width: 80px;
-  }
-
-  .countdown-number {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    color: var(--gold-light);
-    line-height: 1;
-    text-shadow: 0 0 24px rgba(201,168,76,0.5);
-    background: linear-gradient(160deg, rgba(19,61,36,0.9), rgba(10,40,24,0.95));
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 8px;
-    width: clamp(80px, 16vw, 110px);
-    height: clamp(80px, 16vw, 110px);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px rgba(10,40,24,0.6), inset 0 1px 0 rgba(201,168,76,0.15);
-    position: relative;
-  }
-
-  .countdown-number::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; top: 50%;
-    height: 1px;
-    background: rgba(201,168,76,0.12);
-  }
-
-  .countdown-label {
-    font-family: 'Amiri', serif;
-    font-size: 0.85rem;
-    color: rgba(245,237,214,0.6);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .countdown-colon {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: var(--gold-dark);
-    margin-top: -18px;
-    align-self: center;
-  }
-
-  .next-eid-label {
-    margin-top: 28px;
-    font-family: 'Amiri', serif;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: rgba(245,237,214,0.5);
-    font-style: italic;
-    text-align: center;
-    letter-spacing: 0.06em;
-  }
-
-  /* ======================== */
-  /* === SEND A WISH ======== */
-  /* ======================== */
-  #send-wish {
-    background: linear-gradient(160deg, rgba(10,40,24,0.95) 0%, rgba(19,61,36,0.7) 100%);
-  }
-
-  .wish-card {
-    background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%);
-    border: 1px solid rgba(201,168,76,0.35);
-    border-radius: 4px;
-    padding: clamp(28px, 5vw, 48px) clamp(28px, 6vw, 60px);
-    max-width: 580px; width: 100%;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 0 60px rgba(10,40,24,0.8), inset 0 1px 0 rgba(201,168,76,0.15);
-  }
-
-  .wish-card::before, .wish-card::after,
-  .wish-card .corner-br, .wish-card .corner-bl {
-    content: ''; position: absolute;
-    width: 24px; height: 24px;
-    border-color: var(--gold-dark); border-style: solid;
-  }
+  /* SEND A WISH */
+  #send-wish { background: linear-gradient(160deg, rgba(10,40,24,0.95) 0%, rgba(19,61,36,0.7) 100%); }
+  .wish-card { background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%); border: 1px solid rgba(201,168,76,0.35); border-radius: 4px; padding: clamp(28px, 5vw, 48px) clamp(28px, 6vw, 60px); max-width: 580px; width: 100%; text-align: center; position: relative; box-shadow: 0 0 60px rgba(10,40,24,0.8), inset 0 1px 0 rgba(201,168,76,0.15); }
+  .wish-card::before, .wish-card::after, .wish-card .corner-br, .wish-card .corner-bl { content: ''; position: absolute; width: 24px; height: 24px; border-color: var(--gold-dark); border-style: solid; }
   .wish-card::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
-  .wish-card::after  { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+  .wish-card::after { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
   .wish-card .corner-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
   .wish-card .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+  .wish-desc { font-family: 'Amiri', serif; font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--cream); line-height: 1.9; font-style: italic; margin-bottom: 28px; }
+  .link-box { display: flex; gap: 10px; align-items: center; background: rgba(10,40,24,0.8); border: 1px solid rgba(201,168,76,0.3); border-radius: 4px; padding: 12px 16px; margin-bottom: 20px; overflow: hidden; }
+  .link-text { flex: 1; font-family: 'Amiri', serif; font-size: 0.9rem; color: var(--gold-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.02em; }
+  .copy-btn { padding: 10px 20px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); border: none; border-radius: 3px; color: var(--deep-green); font-family: 'Cinzel Decorative', serif; font-size: 0.72rem; letter-spacing: 0.08em; cursor: pointer; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s; flex-shrink: 0; }
+  .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201,168,76,0.3); }
+  .share-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  .share-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(255,255,255,0.07); border: 1px solid rgba(201,168,76,0.25); border-radius: 999px; color: var(--cream); font-family: 'Amiri', serif; font-size: 0.95rem; letter-spacing: 0.06em; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; text-decoration: none; }
+  .share-btn:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); transform: translateY(-1px); }
+  .share-btn svg { width: 18px; height: 18px; fill: var(--gold-light); flex-shrink: 0; }
+  .copy-toast { margin-top: 14px; font-family: 'Amiri', serif; font-size: 0.95rem; color: var(--gold-light); font-style: italic; opacity: 0; transition: opacity 0.4s; min-height: 1.4em; }
+  .copy-toast.show { opacity: 1; }
 
-  .wish-desc {
-    font-family: 'Amiri', serif;
-    font-size: clamp(1rem, 2.2vw, 1.2rem);
-    color: var(--cream); line-height: 1.9;
-    font-style: italic; margin-bottom: 28px;
+  /* DUA */
+  #dua { background: linear-gradient(160deg, rgba(19,61,36,0.7) 0%, rgba(10,40,24,0.9) 100%); border-top: 1px solid rgba(201,168,76,0.18); }
+  .dua-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; max-width: 900px; width: 100%; }
+  .dua-card { background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%); border: 1px solid rgba(201,168,76,0.3); border-radius: 4px; padding: 28px 24px; text-align: center; position: relative; transition: border-color 0.3s, box-shadow 0.3s; }
+  .dua-card:hover { border-color: rgba(201,168,76,0.6); box-shadow: 0 0 30px rgba(201,168,76,0.1); }
+  .dua-card::before, .dua-card::after, .dua-card .corner-br, .dua-card .corner-bl { content: ''; position: absolute; width: 18px; height: 18px; border-color: var(--gold-dark); border-style: solid; }
+  .dua-card::before { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
+  .dua-card::after { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
+  .dua-card .corner-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+  .dua-card .corner-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
+  .dua-arabic { font-family: 'Amiri', serif; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--gold-light); line-height: 1.8; margin-bottom: 12px; text-shadow: 0 0 16px rgba(201,168,76,0.35); direction: rtl; }
+  .dua-transliteration { font-family: 'Amiri', serif; font-size: clamp(0.85rem, 1.8vw, 1rem); color: var(--cream); opacity: 0.8; font-style: italic; line-height: 1.7; margin-bottom: 10px; }
+  .dua-translation { font-family: 'Amiri', serif; font-size: clamp(0.8rem, 1.6vw, 0.95rem); color: rgba(245,237,214,0.55); line-height: 1.7; border-top: 1px solid rgba(201,168,76,0.15); padding-top: 10px; margin-top: 6px; }
+
+  /* ======================== */
+  /* === QUIZ SECTION ======= */
+  /* ======================== */
+  #quiz {
+    background: linear-gradient(160deg, rgba(10,40,24,0.95) 0%, rgba(19,61,36,0.7) 100%);
+    border-top: 1px solid rgba(201,168,76,0.18);
   }
 
-  .link-box {
-    display: flex; gap: 10px; align-items: center;
-    background: rgba(10,40,24,0.8);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 4px;
-    padding: 12px 16px;
-    margin-bottom: 20px;
+  .quiz-wrapper {
+    max-width: 680px; width: 100%;
+  }
+
+  .quiz-progress-bar-outer {
+    width: 100%;
+    height: 6px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 999px;
+    margin-bottom: 10px;
     overflow: hidden;
   }
-
-  .link-text {
-    flex: 1;
-    font-family: 'Amiri', serif;
-    font-size: 0.9rem;
-    color: var(--gold-light);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    letter-spacing: 0.02em;
+  .quiz-progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold-dark), var(--gold-light));
+    border-radius: 999px;
+    transition: width 0.5s ease;
+    width: 0%;
   }
 
-  .copy-btn {
-    padding: 10px 20px;
+  .quiz-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 28px;
+    font-family: 'Amiri', serif;
+    font-size: 0.92rem;
+    color: rgba(245,237,214,0.55);
+    letter-spacing: 0.08em;
+  }
+
+  .quiz-score-display {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+  }
+
+  .quiz-card {
+    background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 4px;
+    padding: clamp(28px, 5vw, 48px) clamp(24px, 5vw, 44px);
+    text-align: center;
+    position: relative;
+    transition: border-color 0.4s, box-shadow 0.4s;
+    min-height: 260px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  }
+  .quiz-card::before, .quiz-card::after, .quiz-card .corner-br, .quiz-card .corner-bl { content: ''; position: absolute; width: 22px; height: 22px; border-color: var(--gold-dark); border-style: solid; }
+  .quiz-card::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+  .quiz-card::after { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+  .quiz-card .corner-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+  .quiz-card .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+
+  .quiz-card.correct {
+    border-color: rgba(80,200,120,0.7);
+    box-shadow: 0 0 40px rgba(80,200,120,0.15), inset 0 0 30px rgba(80,200,120,0.05);
+    animation: correctPulse 0.6s ease;
+  }
+  .quiz-card.wrong {
+    border-color: rgba(220,80,80,0.7);
+    box-shadow: 0 0 40px rgba(220,80,80,0.15), inset 0 0 30px rgba(220,80,80,0.05);
+    animation: wrongPulse 0.6s ease;
+  }
+
+  @keyframes correctPulse {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+  @keyframes wrongPulse {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+  }
+
+  .quiz-question {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--cream);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .quiz-feedback {
+    font-family: 'Amiri', serif;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    line-height: 1.7;
+    min-height: 1.7em;
+    font-style: italic;
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+  .quiz-feedback.show { opacity: 1; }
+  .quiz-feedback.correct-msg { color: rgba(100,220,140,0.9); }
+  .quiz-feedback.wrong-msg { color: rgba(220,100,100,0.9); }
+
+  .quiz-buttons {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  }
+
+  .quiz-btn {
+    padding: 14px 40px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    border: none; border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .quiz-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+  .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-true {
+    background: linear-gradient(135deg, #1a5c30, #2a8c4a);
+    color: #c8f0d8;
+    border: 1px solid rgba(80,200,120,0.3);
+  }
+  .btn-false {
+    background: linear-gradient(135deg, #5c1a1a, #8c2a2a);
+    color: #f0c8c8;
+    border: 1px solid rgba(220,80,80,0.3);
+  }
+
+  .quiz-next-btn {
+    margin-top: 8px;
+    padding: 12px 32px;
     background: linear-gradient(135deg, var(--gold-dark), var(--gold));
     border: none; border-radius: 3px;
     color: var(--deep-green);
     font-family: 'Cinzel Decorative', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
     cursor: pointer;
-    white-space: nowrap;
     transition: transform 0.2s, box-shadow 0.2s;
-    flex-shrink: 0;
-  }
-  .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201,168,76,0.3); }
-
-  .share-row {
-    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-    margin-top: 8px;
-  }
-
-  .share-btn {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 20px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 999px;
-    color: var(--cream);
-    font-family: 'Amiri', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    text-decoration: none;
-  }
-  .share-btn:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); transform: translateY(-1px); }
-  .share-btn svg { width: 18px; height: 18px; fill: var(--gold-light); flex-shrink: 0; }
-
-  .copy-toast {
-    margin-top: 14px;
-    font-family: 'Amiri', serif;
-    font-size: 0.95rem;
-    color: var(--gold-light);
-    font-style: italic;
     opacity: 0;
-    transition: opacity 0.4s;
-    min-height: 1.4em;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
   }
-  .copy-toast.show { opacity: 1; }
+  .quiz-next-btn.show { opacity: 1; pointer-events: all; }
+  .quiz-next-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201,168,76,0.3); }
 
-  /* ======================== */
-  /* === DUA SECTION ======= */
-  /* ======================== */
-  #dua {
-    background: linear-gradient(160deg, rgba(19,61,36,0.7) 0%, rgba(10,40,24,0.9) 100%);
-    border-top: 1px solid rgba(201,168,76,0.18);
-  }
-
-  .dua-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    gap: 24px;
-    max-width: 900px; width: 100%;
-  }
-
-  .dua-card {
+  .quiz-result {
     background: linear-gradient(160deg, rgba(19,61,36,0.85) 0%, rgba(10,40,24,0.95) 100%);
-    border: 1px solid rgba(201,168,76,0.3);
+    border: 1px solid rgba(201,168,76,0.35);
     border-radius: 4px;
-    padding: 28px 24px;
+    padding: 48px 36px;
     text-align: center;
     position: relative;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    display: none;
+    max-width: 680px; width: 100%;
   }
-  .dua-card:hover { border-color: rgba(201,168,76,0.6); box-shadow: 0 0 30px rgba(201,168,76,0.1); }
+  .quiz-result::before, .quiz-result::after, .quiz-result .corner-br, .quiz-result .corner-bl { content: ''; position: absolute; width: 22px; height: 22px; border-color: var(--gold-dark); border-style: solid; }
+  .quiz-result::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+  .quiz-result::after { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+  .quiz-result .corner-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+  .quiz-result .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
 
-  .dua-card::before, .dua-card::after,
-  .dua-card .corner-br, .dua-card .corner-bl {
-    content: ''; position: absolute;
-    width: 18px; height: 18px;
-    border-color: var(--gold-dark); border-style: solid;
-  }
-  .dua-card::before { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
-  .dua-card::after  { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
-  .dua-card .corner-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
-  .dua-card .corner-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
-
-  .dua-arabic {
-    font-family: 'Amiri', serif;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  .result-score {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
     color: var(--gold-light);
-    line-height: 1.8; margin-bottom: 12px;
-    text-shadow: 0 0 16px rgba(201,168,76,0.35);
-    direction: rtl;
+    text-shadow: 0 0 30px rgba(201,168,76,0.5);
+    margin-bottom: 12px;
   }
-
-  .dua-transliteration {
+  .result-msg {
     font-family: 'Amiri', serif;
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    color: var(--cream); opacity: 0.8;
-    font-style: italic; line-height: 1.7;
-    margin-bottom: 10px;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--cream);
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 24px;
   }
+  .quiz-restart-btn {
+    padding: 14px 36px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    border: none; border-radius: 3px;
+    color: var(--deep-green);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .quiz-restart-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(201,168,76,0.3); }
 
-  .dua-translation {
-    font-family: 'Amiri', serif;
-    font-size: clamp(0.8rem, 1.6vw, 0.95rem);
-    color: rgba(245,237,214,0.55);
-    line-height: 1.7;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    padding-top: 10px;
-    margin-top: 6px;
-  }
-
-  /* footer */
-  .site-footer {
-    position: relative; z-index: 2;
-    text-align: center;
-    padding: 32px 24px 40px;
-    border-top: 1px solid rgba(201,168,76,0.12);
-  }
-  .site-footer p {
-    font-family: 'Amiri', serif;
-    font-size: 0.88rem;
-    color: rgba(245,237,214,0.3);
-    letter-spacing: 0.08em;
-  }
+  /* FOOTER */
+  .site-footer { position: relative; z-index: 2; text-align: center; padding: 32px 24px 40px; border-top: 1px solid rgba(201,168,76,0.12); }
+  .site-footer p { font-family: 'Amiri', serif; font-size: 0.88rem; color: rgba(245,237,214,0.3); letter-spacing: 0.08em; }
   .site-footer .gold { color: var(--gold-dark); }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar" aria-label="Primary navigation">
   <a class="nav-brand" href="#home">Eid Glow</a>
   <div class="nav-links">
@@ -630,14 +346,12 @@
     <a class="nav-link" href="#countdown">Countdown</a>
     <a class="nav-link" href="#send-wish">Send a Wish</a>
     <a class="nav-link" href="#dua">Dua</a>
-
+    <a class="nav-link" href="#quiz">Quiz</a>
   </div>
 </nav>
 
-<!-- Star field -->
 <div class="stars" id="stars"></div>
 
-<!-- Geometric border -->
 <div class="geo-border">
 <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -662,8 +376,7 @@
 </svg>
 </div>
 
-<!-- Gift overlay -->
-<div class="gift-overlay" id="giftIntro" role="dialog" aria-modal="true" aria-label="Open your gift">
+<div class="gift-overlay" id="giftIntro" role="dialog" aria-modal="true">
   <div class="gift-card" tabindex="-1">
     <div class="gift-detail">
       <div class="gift-box" id="giftBox" aria-hidden="true">
@@ -676,9 +389,7 @@
   </div>
 </div>
 
-<!-- ======================== -->
-<!-- HOME SECTION -->
-<!-- ======================== -->
+<!-- HOME -->
 <div class="page" id="home">
   <div class="emblem">
     <svg width="120" height="110" viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
@@ -700,34 +411,19 @@
       <circle cx="96" cy="68" r="1.2" fill="#C9A84C" opacity="0.35"/>
     </svg>
   </div>
-
   <div class="arabic">عيد مبارك</div>
   <div class="main-title">Eid Mubarak</div>
   <div class="subtitle">Blessed Eid to You & Yours</div>
-
   <div class="ornament">
-    <div class="ornament-line"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-diamond"></div>
-    <div class="ornament-small"></div>
+    <div class="ornament-line"></div><div class="ornament-small"></div>
+    <div class="ornament-diamond"></div><div class="ornament-small"></div>
     <div class="ornament-line"></div>
   </div>
-
   <div class="card" id="message">
-    <div class="corner-br"></div>
-    <div class="corner-bl"></div>
-    <p class="message">
-      May this blessed Eid fill your home with joy, your heart with peace,<br>
-      and your days with the warmth of Allah's infinite mercy.<br>
-      May your prayers be answered and your fasts accepted.
-    </p>
-    <p class="dua-text">
-      تَقَبَّلَ اللّهُ مِنَّا وَمِنكُم<br>
-      <span style="font-size:0.82em; opacity:0.75;">Taqabbalallahu minna wa minkum</span><br>
-      <span style="font-size:0.8em; opacity:0.65; font-style:italic;">May Allah accept (the worship) from us and from you.</span>
-    </p>
+    <div class="corner-br"></div><div class="corner-bl"></div>
+    <p class="message">May this blessed Eid fill your home with joy, your heart with peace,<br>and your days with the warmth of Allah's infinite mercy.<br>May your prayers be answered and your fasts accepted.</p>
+    <p class="dua-text">تَقَبَّلَ اللّهُ مِنَّا وَمِنكُم<br><span style="font-size:0.82em;opacity:0.75;">Taqabbalallahu minna wa minkum</span><br><span style="font-size:0.8em;opacity:0.65;font-style:italic;">May Allah accept (the worship) from us and from you.</span></p>
   </div>
-
   <div class="lanterns" id="lanterns">
     <div class="lantern">
       <svg width="36" height="72" viewBox="0 0 36 72" xmlns="http://www.w3.org/2000/svg">
@@ -743,7 +439,7 @@
         <line x1="22" y1="58" x2="24" y2="68" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
       </svg>
     </div>
-    <div class="lantern" style="transform-origin:top center; margin-top:-10px;">
+    <div class="lantern" style="transform-origin:top center;margin-top:-10px;">
       <svg width="52" height="100" viewBox="0 0 52 100" xmlns="http://www.w3.org/2000/svg">
         <line x1="26" y1="0" x2="26" y2="10" stroke="#E8CC7A" stroke-width="2"/>
         <polygon points="16,10 36,10 32,18 20,18" fill="#8A6820" stroke="#C9A84C" stroke-width="0.5"/>
@@ -775,83 +471,43 @@
       </svg>
     </div>
   </div>
-
   <div class="moon-row">
     <div class="moon-dot" style="width:5px;height:5px;"></div>
     <div class="moon-dot" style="width:7px;height:7px;opacity:0.7;"></div>
     <div class="moon-dot" style="width:9px;height:9px;opacity:0.55;"></div>
-    <svg width="22" height="22" viewBox="0 0 22 22">
-      <path d="M11 3 A9 9 0 1 1 11 19 A6 6 0 1 0 11 3Z" fill="rgba(201,168,76,0.55)"/>
-    </svg>
+    <svg width="22" height="22" viewBox="0 0 22 22"><path d="M11 3 A9 9 0 1 1 11 19 A6 6 0 1 0 11 3Z" fill="rgba(201,168,76,0.55)"/></svg>
     <div class="moon-dot" style="width:9px;height:9px;opacity:0.55;"></div>
     <div class="moon-dot" style="width:7px;height:7px;opacity:0.7;"></div>
     <div class="moon-dot" style="width:5px;height:5px;"></div>
   </div>
-
-  <p class="verse" id="verse">
-    "If you are grateful, I will surely increase you [ in favor ]." — Surah Ibrahim 14:7
-  </p>
+  <p class="verse" id="verse">"If you are grateful, I will surely increase you [ in favor ]." — Surah Ibrahim 14:7</p>
 </div>
 
-<!-- ======================== -->
-<!-- COUNTDOWN SECTION -->
-<!-- ======================== -->
+<!-- COUNTDOWN -->
 <section class="section" id="countdown">
   <h2 class="section-title">Next Eid al-Fitr</h2>
   <p class="section-sub">Counting down to the next blessed celebration</p>
-  <div class="section-divider">
-    <div class="ornament-line"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-diamond"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-line"></div>
-  </div>
-
+  <div class="section-divider"><div class="ornament-line"></div><div class="ornament-small"></div><div class="ornament-diamond"></div><div class="ornament-small"></div><div class="ornament-line"></div></div>
   <div class="countdown-grid">
-    <div class="countdown-unit">
-      <div class="countdown-number" id="cd-days">000</div>
-      <div class="countdown-label">Days</div>
-    </div>
+    <div class="countdown-unit"><div class="countdown-number" id="cd-days">000</div><div class="countdown-label">Days</div></div>
     <div class="countdown-colon">:</div>
-    <div class="countdown-unit">
-      <div class="countdown-number" id="cd-hours">00</div>
-      <div class="countdown-label">Hours</div>
-    </div>
+    <div class="countdown-unit"><div class="countdown-number" id="cd-hours">00</div><div class="countdown-label">Hours</div></div>
     <div class="countdown-colon">:</div>
-    <div class="countdown-unit">
-      <div class="countdown-number" id="cd-mins">00</div>
-      <div class="countdown-label">Minutes</div>
-    </div>
+    <div class="countdown-unit"><div class="countdown-number" id="cd-mins">00</div><div class="countdown-label">Minutes</div></div>
     <div class="countdown-colon">:</div>
-    <div class="countdown-unit">
-      <div class="countdown-number" id="cd-secs">00</div>
-      <div class="countdown-label">Seconds</div>
-    </div>
+    <div class="countdown-unit"><div class="countdown-number" id="cd-secs">00</div><div class="countdown-label">Seconds</div></div>
   </div>
   <p class="next-eid-label">Eid al-Fitr 1447 AH &nbsp;·&nbsp; Expected 20 March 2027</p>
 </section>
 
-<!-- ======================== -->
-<!-- SEND A WISH SECTION -->
-<!-- ======================== -->
+<!-- SEND A WISH -->
 <section class="section" id="send-wish">
   <h2 class="section-title">Send a Wish</h2>
   <p class="section-sub">Share the blessings — copy the link and send it to your loved ones</p>
-  <div class="section-divider">
-    <div class="ornament-line"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-diamond"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-line"></div>
-  </div>
-
+  <div class="section-divider"><div class="ornament-line"></div><div class="ornament-small"></div><div class="ornament-diamond"></div><div class="ornament-small"></div><div class="ornament-line"></div></div>
   <div class="wish-card">
-    <div class="corner-br"></div>
-    <div class="corner-bl"></div>
-    <p class="wish-desc">
-      Know someone who deserves Eid blessings today?<br>
-      Copy the link below and send it to them — they'll open this page and feel the warmth of your wish. 🌙
-    </p>
+    <div class="corner-br"></div><div class="corner-bl"></div>
+    <p class="wish-desc">Know someone who deserves Eid blessings today?<br>Copy the link below and send it to them — they'll open this page and feel the warmth of your wish. 🌙</p>
     <div class="link-box">
       <span class="link-text" id="page-url">Loading link...</span>
       <button class="copy-btn" onclick="copyLink()">Copy</button>
@@ -870,123 +526,259 @@
   </div>
 </section>
 
-<!-- ======================== -->
-<!-- DUA SECTION -->
-<!-- ======================== -->
+<!-- DUA -->
 <section class="section" id="dua">
   <h2 class="section-title">Eid Duas</h2>
   <p class="section-sub">Beautiful supplications for this blessed day</p>
-  <div class="section-divider">
-    <div class="ornament-line"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-diamond"></div>
-    <div class="ornament-small"></div>
-    <div class="ornament-line"></div>
-  </div>
-
+  <div class="section-divider"><div class="ornament-line"></div><div class="ornament-small"></div><div class="ornament-diamond"></div><div class="ornament-small"></div><div class="ornament-line"></div></div>
   <div class="dua-grid">
-    <div class="dua-card">
-      <div class="corner-br"></div><div class="corner-bl"></div>
-      <div class="dua-arabic">تَقَبَّلَ اللّهُ مِنَّا وَمِنكُم</div>
-      <div class="dua-transliteration">Taqabbalallahu minna wa minkum</div>
-      <div class="dua-translation">May Allah accept (good deeds) from us and from you.</div>
-    </div>
-
-    <div class="dua-card">
-      <div class="corner-br"></div><div class="corner-bl"></div>
-      <div class="dua-arabic">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</div>
-      <div class="dua-transliteration">Allahumma innaka 'afuwwun tuhibbul 'afwa fa'fu 'anni</div>
-      <div class="dua-translation">O Allah, You are Pardoning and You love pardon, so pardon me.</div>
-    </div>
-
-    <div class="dua-card">
-      <div class="corner-br"></div><div class="corner-bl"></div>
-      <div class="dua-arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً</div>
-      <div class="dua-transliteration">Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan</div>
-      <div class="dua-translation">Our Lord, give us good in this world and good in the Hereafter.</div>
-    </div>
-
-    <div class="dua-card">
-      <div class="corner-br"></div><div class="corner-bl"></div>
-      <div class="dua-arabic">اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا</div>
-      <div class="dua-transliteration">Allahumma barik lana fima razaqtana</div>
-      <div class="dua-translation">O Allah, bless us in what You have provided for us.</div>
-    </div>
+    <div class="dua-card"><div class="corner-br"></div><div class="corner-bl"></div><div class="dua-arabic">تَقَبَّلَ اللّهُ مِنَّا وَمِنكُم</div><div class="dua-transliteration">Taqabbalallahu minna wa minkum</div><div class="dua-translation">May Allah accept (good deeds) from us and from you.</div></div>
+    <div class="dua-card"><div class="corner-br"></div><div class="corner-bl"></div><div class="dua-arabic">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</div><div class="dua-transliteration">Allahumma innaka 'afuwwun tuhibbul 'afwa fa'fu 'anni</div><div class="dua-translation">O Allah, You are Pardoning and You love pardon, so pardon me.</div></div>
+    <div class="dua-card"><div class="corner-br"></div><div class="corner-bl"></div><div class="dua-arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً</div><div class="dua-transliteration">Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan</div><div class="dua-translation">Our Lord, give us good in this world and good in the Hereafter.</div></div>
+    <div class="dua-card"><div class="corner-br"></div><div class="corner-bl"></div><div class="dua-arabic">اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا</div><div class="dua-transliteration">Allahumma barik lana fima razaqtana</div><div class="dua-translation">O Allah, bless us in what You have provided for us.</div></div>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- QUIZ -->
+<section class="section" id="quiz">
+  <h2 class="section-title">Eid Quiz</h2>
+  <p class="section-sub">20 questions — how much do you know about Eid?</p>
+  <div class="section-divider"><div class="ornament-line"></div><div class="ornament-small"></div><div class="ornament-diamond"></div><div class="ornament-small"></div><div class="ornament-line"></div></div>
+
+  <div class="quiz-wrapper" id="quiz-wrapper">
+    <div class="quiz-progress-bar-outer"><div class="quiz-progress-bar-inner" id="quiz-progress"></div></div>
+    <div class="quiz-meta">
+      <span id="quiz-counter">Question 1 of 20</span>
+      <span class="quiz-score-display">Score: <span id="quiz-score">0</span></span>
+    </div>
+    <div class="quiz-card" id="quiz-card">
+      <div class="corner-br"></div><div class="corner-bl"></div>
+      <p class="quiz-question" id="quiz-question">Loading question...</p>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <div class="quiz-buttons">
+        <button class="quiz-btn btn-true" id="btn-true" onclick="answer(true)">✓ True</button>
+        <button class="quiz-btn btn-false" id="btn-false" onclick="answer(false)">✗ False</button>
+      </div>
+      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+
+  <div class="quiz-result" id="quiz-result">
+    <div class="corner-br"></div><div class="corner-bl"></div>
+    <div class="result-score" id="result-score">0/20</div>
+    <p class="result-msg" id="result-msg"></p>
+    <button class="quiz-restart-btn" onclick="restartQuiz()">Play Again ✦</button>
+  </div>
+</section>
+
 <footer class="site-footer">
   <p>Made with <span class="gold">♥</span> for Eid &nbsp;·&nbsp; عيد مبارك</p>
 </footer>
 
 <script>
-  // Star field
-  const container = document.getElementById('stars');
-  for (let i = 0; i < 140; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = Math.random() * 2.4 + 0.6;
-    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${size}px;height:${size}px;--d:${2+Math.random()*4}s;--delay:-${Math.random()*6}s;`;
-    container.appendChild(s);
+// Stars
+const container = document.getElementById('stars');
+for (let i = 0; i < 140; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.4 + 0.6;
+  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${size}px;height:${size}px;--d:${2+Math.random()*4}s;--delay:-${Math.random()*6}s;`;
+  container.appendChild(s);
+}
+
+// Gift
+const giftIntro = document.getElementById('giftIntro');
+function openGift() { giftIntro.classList.add('hidden'); }
+document.getElementById('giftBox').addEventListener('click', openGift);
+document.getElementById('openGiftButton').addEventListener('click', openGift);
+
+// Link
+document.getElementById('page-url').textContent = window.location.href;
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const t = document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  });
+}
+function shareWhatsApp() {
+  window.open('https://wa.me/?text=' + encodeURIComponent('🌙 Eid Mubarak! ' + window.location.href), '_blank');
+}
+function shareNative() {
+  if (navigator.share) navigator.share({ title: 'Eid Mubarak 🌙', url: window.location.href });
+  else copyLink();
+}
+
+// Countdown
+const eidDate = new Date('2027-03-20T06:00:00');
+function updateCountdown() {
+  const diff = eidDate - new Date();
+  if (diff <= 0) return;
+  const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(3,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown(); setInterval(updateCountdown, 1000);
+
+// ========================
+// QUIZ — 20 Questions
+// ========================
+const questions = [
+  {q:"Eid al-Fitr marks the end of Ramadan.",a:true},
+  {q:"Eid al-Adha is also known as the Festival of Breaking the Fast.",a:false},
+  {q:"Muslims are required to pay Zakat al-Fitr before the Eid prayer.",a:true},
+  {q:"The Eid prayer is performed at noon.",a:false},
+  {q:"Eid al-Adha commemorates the willingness of Ibrahim (AS) to sacrifice his son.",a:true},
+  {q:"Ramadan lasts for exactly 30 days every year.",a:false},
+  {q:"Eid Mubarak means 'Blessed Celebration'.",a:true},
+  {q:"During Eid, fasting is recommended.",a:false},
+  {q:"The word 'Eid' comes from the Arabic word meaning 'to return' or 'recurring happiness'.",a:true},
+  {q:"Eid al-Fitr is celebrated for one day only across all Muslim countries.",a:false},
+  {q:"Wearing new or best clothes on Eid is a recommended Sunnah.",a:true},
+  {q:"Eid al-Adha falls on the 1st of Shawwal in the Islamic calendar.",a:false},
+  {q:"The Hajj pilgrimage takes place during the same month as Eid al-Adha.",a:true},
+  {q:"Giving gifts to children on Eid is a mandatory Islamic obligation.",a:false},
+  {q:"The Eid prayer consists of two rak'ahs.",a:true},
+  {q:"Muslims are allowed to fast on the day of Eid al-Fitr.",a:false},
+  {q:"'Taqabbalallahu minna wa minkum' is a common Eid greeting.",a:true},
+  {q:"The Islamic calendar is a solar calendar.",a:false},
+  {q:"Eid al-Fitr falls on the 1st of Shawwal.",a:true},
+  {q:"The sacrifice during Eid al-Adha is called Udhiyah or Qurbani.",a:true}
+];
+
+const TOTAL = questions.length; // 20
+
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let shuffled = [];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
+  return a;
+}
 
-  // Gift overlay
-  const giftIntro = document.getElementById('giftIntro');
-  function openGift() { giftIntro.classList.add('hidden'); }
-  document.getElementById('giftBox').addEventListener('click', openGift);
-  document.getElementById('openGiftButton').addEventListener('click', openGift);
-
-  // Set page URL in send-wish section
-  document.getElementById('page-url').textContent = window.location.href;
-
-  // Copy link
-  function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      const t = document.getElementById('copy-toast');
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    });
-  }
-
-  // WhatsApp share
-  function shareWhatsApp() {
-    const msg = encodeURIComponent('🌙 Eid Mubarak! I wanted to share this with you: ' + window.location.href);
-    window.open('https://wa.me/?text=' + msg, '_blank');
-  }
-
-  // Native share
-  function shareNative() {
-    if (navigator.share) {
-      navigator.share({ title: 'Eid Mubarak 🌙', text: 'Wishing you a blessed Eid!', url: window.location.href });
+function playSound(correct) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (correct) {
+      [523, 659, 784].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.12);
+        gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
+        gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i * 0.12 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.12 + 0.4);
+        osc.start(ctx.currentTime + i * 0.12);
+        osc.stop(ctx.currentTime + i * 0.12 + 0.4);
+      });
     } else {
-      copyLink();
+      [300, 250].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.18);
+        gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.18);
+        gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + i * 0.18 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.18 + 0.45);
+        osc.start(ctx.currentTime + i * 0.18);
+        osc.stop(ctx.currentTime + i * 0.18 + 0.5);
+      });
     }
+  } catch(e) {}
+}
+
+function loadQuestion() {
+  const q = shuffled[currentIndex];
+  document.getElementById('quiz-question').textContent = q.q;
+  document.getElementById('quiz-counter').textContent = `Question ${currentIndex + 1} of ${TOTAL}`;
+  document.getElementById('quiz-score').textContent = score;
+  document.getElementById('quiz-progress').style.width = `${(currentIndex / TOTAL) * 100}%`;
+  const fb = document.getElementById('quiz-feedback');
+  fb.textContent = '';
+  fb.className = 'quiz-feedback';
+  const card = document.getElementById('quiz-card');
+  card.className = 'quiz-card';
+  document.getElementById('btn-true').disabled = false;
+  document.getElementById('btn-false').disabled = false;
+  document.getElementById('quiz-next').className = 'quiz-next-btn';
+  answered = false;
+}
+
+function answer(userAnswer) {
+  if (answered) return;
+  answered = true;
+  const q = shuffled[currentIndex];
+  const correct = userAnswer === q.a;
+  const card = document.getElementById('quiz-card');
+  const fb = document.getElementById('quiz-feedback');
+
+  document.getElementById('btn-true').disabled = true;
+  document.getElementById('btn-false').disabled = true;
+
+  if (correct) {
+    score++;
+    card.className = 'quiz-card correct';
+    fb.textContent = '✦ Correct! MashaAllah, well done!';
+    fb.className = 'quiz-feedback show correct-msg';
+  } else {
+    card.className = 'quiz-card wrong';
+    fb.textContent = `Not quite — the answer is ${q.a ? 'True' : 'False'}. Keep going!`;
+    fb.className = 'quiz-feedback show wrong-msg';
   }
 
-  // Countdown to Eid al-Fitr 2027 (March 20, 2027)
-  const eidDate = new Date('2027-03-20T06:00:00');
-  function updateCountdown() {
-    const now = new Date();
-    const diff = eidDate - now;
-    if (diff <= 0) {
-      document.getElementById('cd-days').textContent = '000';
-      document.getElementById('cd-hours').textContent = '00';
-      document.getElementById('cd-mins').textContent = '00';
-      document.getElementById('cd-secs').textContent = '00';
-      return;
-    }
-    const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs  = Math.floor((diff % (1000 * 60)) / 1000);
-    document.getElementById('cd-days').textContent  = String(days).padStart(3, '0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
-    document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+  playSound(correct);
+  document.getElementById('quiz-score').textContent = score;
+  document.getElementById('quiz-next').className = 'quiz-next-btn show';
+}
+
+function nextQuestion() {
+  currentIndex++;
+  if (currentIndex >= TOTAL) {
+    showResult();
+  } else {
+    loadQuestion();
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+}
+
+function showResult() {
+  document.getElementById('quiz-wrapper').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  document.getElementById('result-score').textContent = `${score}/${TOTAL}`;
+  document.getElementById('quiz-progress').style.width = '100%';
+
+  let msg = '';
+  if (score >= 18) msg = 'Outstanding! MashaAllah — you truly know your Eid! 🌙✨';
+  else if (score >= 15) msg = 'Excellent work! Your Eid knowledge is impressive. 🌟';
+  else if (score >= 12) msg = 'Well done! A solid score — keep learning! 😊';
+  else if (score >= 8)  msg = 'Good effort! There is always more to discover about Eid. 📖';
+  else msg = 'Keep exploring — every question is a chance to learn more about our beautiful faith. 💚';
+
+  document.getElementById('result-msg').textContent = msg;
+  playSound(score >= 10);
+}
+
+function restartQuiz() {
+  currentIndex = 0; score = 0;
+  shuffled = shuffle(questions);
+  document.getElementById('quiz-wrapper').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  loadQuestion();
+}
+
+// Init quiz
+shuffled = shuffle(questions);
+loadQuestion();
 </script>
 </body>
 </html>
